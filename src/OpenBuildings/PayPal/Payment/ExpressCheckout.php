@@ -33,7 +33,7 @@ class Payment_ExpressCheckout extends Payment {
 	{
 		$order = $this->order();
 
-		return $this->_request('DoExpressCheckoutPayment', array(
+		return $this->_request('DoExpressCheckoutPayment', $this->_set_params(array(
 			'TOKEN'                          => $token,
 			'PAYERID'                        => $payer_id,
 
@@ -49,7 +49,7 @@ class Payment_ExpressCheckout extends Payment {
 			'PAYMENTREQUEST_0_CURRENCYCODE'  => $this->config('currency'),
 
 			'PAYMENTREQUEST_0_PAYMENTACTION' => 'Sale'
-		));
+		)));
 	}
 
 	protected function _set_params(array $params = array())
