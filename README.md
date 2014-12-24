@@ -14,9 +14,23 @@ Features:
 Installation
 ------------
 
-You could use this library in your project by running:
+You could use this library in your project by, adjust your composer.json to include
 
-    php composer.phar install
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/dvershinin/paypal"
+        }
+    ],
+    
+and
+
+    "require": {
+        "openbuildings/paypal": "dev-master"
+
+then on the command line, run:
+
+    php composer.phar update
 
 [Learn more about Composer](http://getcomposer.org).
 
