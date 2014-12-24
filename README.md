@@ -44,8 +44,18 @@ $payment->cancel_url('example.com/success');
 // Send a SetExpressCheckout API call
 $response = $payment->set_express_checkout();
 
-// Finish the payment with the token and the payer id received.
-$payment->do_express_checkout_payment($response['TOKEN'], $response['PAYERID']);
+// Redirect to Paypal for payment
+$paypalUrl = Payment::webscr_url('_express-checkout', [
+    'useraction' => 'commit',
+    'token' => $response['TOKEN'],
+]);
+return Redirect::to($paypalUrl); // example redirect call for Laravel
+
+// On subsequent page, finish the payment with the token and the payer id received.
+$response = $payment->do_express_checkout_payment(
+    Input::get('token'), 
+			 Input::get('PayerID')
+);
 
 ```
 
