@@ -79,7 +79,7 @@ Documentation
  * [Getting started](docs/getting-started.md)
  * [Configuration](docs/configuration.md)
  * [ExpressCheckout](docs/ExpressCheckout.md)
- * [Recurring Payments](docs/recurring.md)
+ * [Recurring Payments](docs/recurring.md) ([API docs](https://developer.paypal.com/docs/classic/express-checkout/ht_ec-recurringPaymentProfile-curl-etc/))
  * [Adaptive Payments](docs/adaptive-payments.md)
 
 Contributing
