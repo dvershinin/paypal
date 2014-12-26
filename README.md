@@ -78,7 +78,7 @@ Documentation
 
  * [Getting started](docs/getting-started.md)
  * [Configuration](docs/configuration.md)
- * [ExpressCheckout](docs/ExpressCheckout.md)
+ * [ExpressCheckout](docs/ExpressCheckout.md) : [GetExpressCheckout](https://developer.paypal.com/docs/classic/api/merchant/GetExpressCheckoutDetails_API_Operation_NVP/), [DoExpressCheckout](https://developer.paypal.com/docs/classic/api/merchant/DoExpressCheckoutPayment_API_Operation_NVP/)
  * [Recurring Payments](docs/recurring.md) ([API docs](https://developer.paypal.com/docs/classic/express-checkout/ht_ec-recurringPaymentProfile-curl-etc/))
  * [Adaptive Payments](docs/adaptive-payments.md)
 
