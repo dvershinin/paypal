@@ -42,6 +42,11 @@ abstract class Payment {
 
 	private static $environment = self::ENVIRONMENT_SANDBOX;
 	
+	/**
+	 * @param string $name
+	 * @param array $config
+	 * @return Payment|Payment_ExpressCheckout
+	 */
 	public static function instance($name, array $config = array())
 	{
 		if (empty(self::$instances[$name]))

@@ -11,8 +11,11 @@ class Payment_ExpressCheckout extends Payment {
 
 	const API_VERSION = '98.0';
 
-	public function get_express_checkout_details(array $params)
+	public function get_express_checkout_details($token, array $params = [])
 	{
+
+		$params += ['TOKEN' => $token];
+		
 		if ( ! isset($params['TOKEN']))
 			throw new Exception(
 				'You must provide a TOKEN parameter for method "'.__METHOD__.'"'
@@ -102,4 +105,24 @@ class Payment_ExpressCheckout extends Payment {
 			'SIGNATURE' => $this->config('signature'),
 		) + $params);
 	}
+	
+	/**
+	 * Get redirect URL to Paypal page
+	 * @param boolean $commit Whether payment button is to be displayed at Paypal
+	 * @param string $token Token from SetExpressCheckout
+	 */
+	public static function getRedirectUrl($token, $commit = true)
+	{
+		$params = array(
+			'token' => $token
+		);
+		
+		if ($commit) {
+			$params['useraction'] = 'commit';
+		}
+		
+		// Redirect to Paypal for payment
+		return Payment::webscr_url('_express-checkout', $params);
+	}
+	
 }
