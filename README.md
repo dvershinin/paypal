@@ -14,9 +14,23 @@ Features:
 Installation
 ------------
 
-You could use this library in your project by running:
+You could use this library in your project by, adjust your composer.json to include
 
-    php composer.phar install
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/dvershinin/paypal"
+        }
+    ],
+    
+and
+
+    "require": {
+        "openbuildings/paypal": "dev-master"
+
+then on the command line, run:
+
+    php composer.phar update
 
 [Learn more about Composer](http://getcomposer.org).
 
@@ -44,8 +58,18 @@ $payment->cancel_url('example.com/success');
 // Send a SetExpressCheckout API call
 $response = $payment->set_express_checkout();
 
-// Finish the payment with the token and the payer id received.
-$payment->do_express_checkout_payment($response['TOKEN'], $response['PAYERID']);
+// Redirect to Paypal for payment
+$paypalUrl = Payment::webscr_url('_express-checkout', [
+    'useraction' => 'commit',
+    'token' => $response['TOKEN'],
+]);
+return Redirect::to($paypalUrl); // example redirect call for Laravel
+
+// On subsequent page, finish the payment with the token and the payer id received.
+$response = $payment->do_express_checkout_payment(
+    Input::get('token'), 
+			 Input::get('PayerID')
+);
 
 ```
 
@@ -54,8 +78,8 @@ Documentation
 
  * [Getting started](docs/getting-started.md)
  * [Configuration](docs/configuration.md)
- * [ExpressCheckout](docs/ExpressCheckout.md)
- * [Recurring Payments](docs/recurring.md)
+ * [ExpressCheckout](docs/ExpressCheckout.md) : [GetExpressCheckout](https://developer.paypal.com/docs/classic/api/merchant/GetExpressCheckoutDetails_API_Operation_NVP/), [DoExpressCheckout](https://developer.paypal.com/docs/classic/api/merchant/DoExpressCheckoutPayment_API_Operation_NVP/)
+ * [Recurring Payments](docs/recurring.md) ([API docs](https://developer.paypal.com/docs/classic/express-checkout/ht_ec-recurringPaymentProfile-curl-etc/))
  * [Adaptive Payments](docs/adaptive-payments.md)
 
 Contributing
