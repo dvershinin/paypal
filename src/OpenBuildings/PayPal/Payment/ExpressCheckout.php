@@ -16,11 +16,6 @@ class Payment_ExpressCheckout extends Payment {
 
 		$params += ['TOKEN' => $token];
 		
-		if ( ! isset($params['TOKEN']))
-			throw new Exception(
-				'You must provide a TOKEN parameter for method "'.__METHOD__.'"'
-			);
-
 		return $this->_request('GetExpressCheckoutDetails', $params);
 	}
 
@@ -97,13 +92,16 @@ class Payment_ExpressCheckout extends Payment {
 
 	protected function _request($method, array $params = array())
 	{
-		return $this->request(static::merchant_endpoint_url(), array(
+		
+		$params = array(
 			'METHOD'    => $method,
 			'VERSION'   => Payment_ExpressCheckout::API_VERSION,
 			'USER'      => $this->config('username'),
 			'PWD'       => $this->config('password'),
 			'SIGNATURE' => $this->config('signature'),
-		) + $params);
+		) + $params;
+		
+		return $this->request(static::merchant_endpoint_url(), $params);
 	}
 	
 	/**

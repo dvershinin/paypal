@@ -78,8 +78,17 @@ Documentation
 
  * [Getting started](docs/getting-started.md)
  * [Configuration](docs/configuration.md)
- * [ExpressCheckout](docs/ExpressCheckout.md) : [GetExpressCheckout](https://developer.paypal.com/docs/classic/api/merchant/GetExpressCheckoutDetails_API_Operation_NVP/), [DoExpressCheckout](https://developer.paypal.com/docs/classic/api/merchant/DoExpressCheckoutPayment_API_Operation_NVP/)
- * [Recurring Payments](docs/recurring.md) ([API docs](https://developer.paypal.com/docs/classic/express-checkout/ht_ec-recurringPaymentProfile-curl-etc/))
+ * [ExpressCheckout](docs/ExpressCheckout.md) 
+    * [SetExpressCheckout](https://developer.paypal.com/docs/classic/api/merchant/SetExpressCheckout_API_Operation_NVP/)
+    * [GetExpressCheckout](https://developer.paypal.com/docs/classic/api/merchant/GetExpressCheckoutDetails_API_Operation_NVP/)
+    * [DoExpressCheckout](https://developer.paypal.com/docs/classic/api/merchant/DoExpressCheckoutPayment_API_Operation_NVP/)
+ * [Recurring Payments](docs/recurring.md) 
+    * [Overview of API](https://developer.paypal.com/docs/classic/express-checkout/ht_ec-recurringPaymentProfile-curl-etc/) 
+    * [How it works](http://www.slideshare.net/rpawluszek/express-checkout-recurring-payments)
+    * [Handling recurring payments - has useful notes for passing Digital category type](https://developer.paypal.com/docs/classic/express-checkout/integration-guide/ECRecurringPayments/)
+    * [CreateRecurringPaymentsProfile](https://developer.paypal.com/docs/classic/api/merchant/CreateRecurringPaymentsProfile_API_Operation_NVP/)
+    * [GetRecurringPaymentsProfileDetails](https://developer.paypal.com/docs/classic/api/merchant/GetRecurringPaymentsProfileDetails_API_Operation_NVP/)
+    
  * [Adaptive Payments](docs/adaptive-payments.md)
 
 Contributing

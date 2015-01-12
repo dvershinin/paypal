@@ -9,17 +9,15 @@ namespace OpenBuildings\PayPal;
  */
 class Payment_Recurring extends Payment_ExpressCheckout {
 
-	protected function _set_params()
+	protected function _set_params(array $params = array())
 	{
-		return array_replace(parent::_set_params(), array(
-			'PAYMENTREQUEST_0_AMT'             => 0,
-			'PAYMENTREQUEST_0_ITEMAMT'         => 0,
-			'PAYMENTREQUEST_0_SHIPPINGAMT'     => 0,
+		$result = array_replace(parent::_set_params($params), array(
 			'L_BILLINGTYPE0'                   => 'RecurringPayments',
 			'L_BILLINGAGREEMENTDESCRIPTION0'   => $this->config('description'),
 			'L_PAYMENTREQUEST_0_ITEMCATEGORY0' => 'Digital',
-			'MAXAMT'                           => $this->transaction_amount(),
 		));
+		
+		return $result;
 	}
 
 	public function transaction_amount()
@@ -34,21 +32,20 @@ class Payment_Recurring extends Payment_ExpressCheckout {
 		return $amount;
 	}
 
-	public function create_recurring_payments_profile(array $params)
+	public function create_recurring_payments_profile($token, array $params)
 	{
-		return $this->_request('CreateRecurringPaymentsProfile', array(
-			'TOKEN'             => $params['token'],
-			'SUBSCRIBERNAME'    => isset($params['subscriber_name']) ? $params['subscriber_name'] : NULL,
+		
+		$params+= [
+			'TOKEN'             => $token,
 			'PROFILESTARTDATE'  => gmdate('Y-m-d\TH:i:s.00\Z', strtotime('+1 hour')),
-			'PROFILEREFERENCE'  => isset($params['application_id']) ? $params['application_id'] : NULL,
 			'DESC'              => $this->config('description'),
 			'MAXFAILEDATTEMPTS' => $this->config('max_failed_attempts'),
 			'AUTOBILLOUTAMT'    => 'AddToNextBilling',
-			'BILLINGPERIOD'     => $this->config('billing_period'),
-			'BILLINGFREQUENCY'     => $this->config('billing_frequency'),
 			'AMT'               => $this->config('amount'),
 			'CURRENCYCODE'      => $this->config('paypal.currency'),
-		));
+		];
+		
+		return $this->_request('CreateRecurringPaymentsProfile', $params);
 	}
 
 	public function manage_recurring_payments_profile_status(array $params)
